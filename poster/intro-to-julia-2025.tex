@@ -75,10 +75,10 @@
 
     \fill[textcolor] (qrcodebase.north west) rectangle (qrcodebase.south east); % white background for qr code
 
-    \node[background,anchor=south east] at (qrcodebase.south east) {\qrcode[nolink,height=0.225\pdfpagewidth]{www.google.com}}; % automatically generated qr code, correctly aligned with the title. Replace www.google.com with the link you want to use: the longer the link, the more complex (and uglier) the qr code. The qr code is a square with size equal to 22.5% of the page width (this worked for me). Since its size is used to establish the alignment of the text next to it, you may want to play around a bit to get it to work.
+    \node[background,anchor=south east] at (qrcodebase.south east) {\qrcode[nolink,height=0.225\pdfpagewidth]{https://julia-users-trondheim.github.io}}; % automatically generated qr code, correctly aligned with the title. Replace www.google.com with the link you want to use: the longer the link, the more complex (and uglier) the qr code. The qr code is a square with size equal to 22.5% of the page width (this worked for me). Since its size is used to establish the alignment of the text next to it, you may want to play around a bit to get it to work.
 
     \draw (title.west |- qrcodebase.north) node[anchor=north west,text width=0.6\pdfpagewidth,textcolor,align=justify,font={\huge\sffamily}] (parone) {%
-    \hl{Julia} is an open source programming language with scientific computing as one of its main targets. It allows for \hl{fast prototyping} while also directly producing \hl{fast and high performance} as well as \hl{reproducible code}.
+    \hl{Julia} is an open source programming language with scientific computing as one of its main targets. It allows for \hl{fast prototyping} while also directly producing \hl{fast}, \hl{high performance} as well as \hl{reproducible code}.
     \\[\baselineskip]
 In this workshop we give an introduction to the language, how to install \hl{Julia}, get started and work with \hl{Pluto} notebooks.
 A main focus is based on how to start programming in \hl{Julia} if you come from Python, Matlab or R.
