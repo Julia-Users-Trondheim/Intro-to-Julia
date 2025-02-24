@@ -3,7 +3,7 @@
 \usepackage{booktabs,listings}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{pgfplots}
+\usepackage{pgfplots, enumitem}
 \usepackage{amsmath, amssymb, bm}
 \usepackage{minted}
 \AtBeginSection[]{
@@ -26,20 +26,80 @@
 %
 	\title{Introduction to Julia}
 	\subtitle{Presentation and Workshop}
-	\author{Ronny Bergmann}
-	\date{Julia Users Group Trondheim\\ and\\
-    Department of Mathematical Sciences, NTNU.\\[\baselineskip]March 20, 2025}
+	\author[Ronny Bergmann]{\large{Ronny Bergmann}\\[\baselineskip]\ }
+	\date[March 20, 2025]{Julia Users Group Trondheim\\[-.1\baselineskip]{\footnotesize and}\\[-.1\baselineskip]
+    Department of Mathematical Sciences, NTNU.\\[\baselineskip]
+    Trondheim,\hfill March 20, 2025.}
 \begin{document}
 	\maketitle
     \begin{frame}{Overview}
         \tableofcontents
     \end{frame}
     \section{What is Julia?}
-    \section{Installation \& REPL}
+    \begin{frame}{Goal: Scientific Computing \& Fast Prototyping}
+    \end{frame}
+    \begin{frame}{Goal: Scientific Computing \& Fast Prototyping}
+    \end{frame}
     \begin{frame}{Important Resources}
+        \begin{description}
+            \item[Main homepage] \url{https://julialang.org}
+            \item[Modern Julia Workflows] \url{https://modernjuliaworkflows.org/}
+            \item[Discourse] forum \url{https://discourse.julialang.org}
+            % TODO Add QR Code for the direct file
+            \item[These slides] \url{https://github.com/Julia-Users-Trondheim/Intro-to-Julia/blob/main/presentation/introduction-to-julia.pdf}
+        \end{description}
+    \end{frame}
+    \section{Installation \& REPL}
+    \begin{frame}{Installation}
+    \end{frame}
+    \begin{frame}{Read-Eval-Print Loop (REPL)}
+        The Julia command line is called \alert{REPL}.
+
+        Quick commands
+        \begin{description}[leftmargin=1em]
+            \item[\^\ D] Quit
+            \item[\^\ L] Clear console screen
+            \item[Up Arrow] last command
+        \end{description}
+    \end{frame}
+    \begin{frame}{REPL modes}
+        Starting with special characters on REPL enters specific modes
+        \begin{description}[leftmargin=1em]
+            \item[?] help mode\\
+            quick access to the documentation of a function
+            \\[.5\baselineskip]
+            \textbf{Example}:\\
+            \mintinline{julia}!? sqrt! displays the help for the \mintinline{julia}|sqrt| function on REPL,
+            \\
+            see also the (HTML) documentation\\
+            {\footnotesize\url{https://docs.julialang.org/en/v1/base/math/\#Base.sqrt-Tuple{Number}}}
+            \\
+            \item[{]}] package mode
+            \\ quick access to manage packages
+            \item[;] shell mode
+            \\ quick access to shell without exiting Julia,\\
+            e.\,g.\ to change folders
+        \end{description}
+    \end{frame}
+    \section{Mean features}
+    \begin{frame}{General Code format}
 
     \end{frame}
-    \section{Multiple Dispatch}
+    \begin{frame}{General Philosophy}
+
+    \end{frame}
+    \begin{frame}{For-loops, while and such}
+
+    \end{frame}
+    \begin{frame}{Functions}
+
+    \end{frame}
+    \begin{frame}{structs – Data structures}
+
+    \end{frame}
+    \begin{frame}{Multiple Dispatch}
+
+    \end{frame}
     \section{Packages}
     \section{Pluto Notebooks}
     \section{Workshop: Let's get you started with Julia!}
