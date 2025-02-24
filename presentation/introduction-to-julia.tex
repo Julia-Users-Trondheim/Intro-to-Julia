@@ -1,0 +1,46 @@
+\documentclass[aspectratio=169, handout]{beamer}
+\usepackage[english]{babel}
+\usepackage{booktabs,listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{minted}
+\AtBeginSection[]{
+  {
+    \setbeamertemplate{sidebar left}[NTNUverticalplain]%
+    \begin{frame}
+      \addtocounter{framenumber}{-1}
+      \vfill
+      \centering
+      \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+    \end{frame}
+  }
+}
+\usetheme[style=vertical, mathfont=serif]{NTNU}
+%
+% Edit your meta data here
+%
+	\title{Introduction to Julia}
+	\subtitle{Presentation and Workshop}
+	\author{Ronny Bergmann}
+	\date{Julia Users Group Trondheim\\ and\\
+    Department of Mathematical Sciences, NTNU.\\[\baselineskip]March 20, 2025}
+\begin{document}
+	\maketitle
+    \begin{frame}{Overview}
+        \tableofcontents
+    \end{frame}
+    \section{What is Julia?}
+    \section{Installation \& REPL}
+    \begin{frame}{Important Resources}
+
+    \end{frame}
+    \section{Multiple Dispatch}
+    \section{Packages}
+    \section{Pluto Notebooks}
+    \section{Workshop: Let's get you started with Julia!}
+\end{document}
