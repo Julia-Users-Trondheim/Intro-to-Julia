@@ -1,11 +1,17 @@
-\documentclass[aspectratio=169, handout]{beamer}
+\documentclass[aspectratio=169, 12pt]{beamer}
 \usepackage[english]{babel}
 \usepackage{booktabs,listings}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{pgfplots, enumitem}
+\usepackage{pgfplots}
 \usepackage{amsmath, amssymb, bm}
 \usepackage{minted, qrcode}
+\definecolor{juliared}{rgb}{0.796, 0.235, 0.2}
+\definecolor{juliagreen}{rgb}{0.22, 0.596, 0.149}
+\definecolor{juliablue}{rgb}{0.251, 0.388, 0.847}
+\definecolor{juliapurple}{rgb}{0.584, 0.345, 0.698}
+\setminted{style=default}
+\setbeamersize{description width=0.3cm}
 \AtBeginSection[]{
   {
     \setbeamertemplate{sidebar left}[NTNUverticalplain]%
@@ -21,7 +27,6 @@
   }
 }
 \usetheme[style=vertical, mathfont=serif]{NTNU}
-\setlist[description]{font=\bfseries\color{NTNUBlue}, leftmargin=1em}
 %
 % Edit your meta data here
 %
@@ -38,8 +43,45 @@
     \end{frame}
     \section{What is Julia?}
     \begin{frame}{Goal: Scientific Computing \& Fast Prototyping}
+        In scientific computing we need
+        \begin{itemize}
+            \item high performance to tackle large scale problems
+            \begin{itemize}
+                \item[$\Rightarrow$] compiled languages (C/C++, Rust)
+                \item all types are known at compile time
+                \item static, hence maybe missing flexibility
+            \end{itemize}
+            \pause
+            \item high-level dynamic languages (like Python, Matlab, R)
+            \begin{itemize}
+                \item[$\Rightarrow$] fast prototyping
+                \item types have to be \emph{inferred} at runtime
+                \item code is interpreted (slow)
+            \end{itemize}
+        \end{itemize}
+        \pause
+        \vspace{\baselineskip}
+        \alert{Often:} Fast code is written in C/C++ and  is interfaced.
+        \\[.5\baselineskip]
+        $\Rightarrow$ new users might have to compile the C/C++ (e.g. MEX files)
     \end{frame}
-    \begin{frame}{A short history}
+    \begin{frame}{Combine both: Julia!}
+        \alert{Julia} is
+        \begin{itemize}
+            \item dynamic with type inference
+            \item just-in-time (JIT) compiled
+            \item focusses on high-level numerical computing
+        \end{itemize}
+        \pause
+        \vspace{\baselineskip}
+        \textbf{\alert{A short history}}
+        \begin{description}
+            \item[2009] Adam Edelman starts the project with\\
+            Jeff Bezanson, Stefan Karpinski, Viral B. Shah
+            \item[2012] first public version
+            \item[2018] Julia 1.0, i.e.\, no breaking releases since then
+            \item[2024] Julia 1.11
+        \end{description}
     \end{frame}
     \begin{frame}{Resources}
         \begin{description}
@@ -47,26 +89,53 @@
             \item[Documentation] \url{https://docs.julialang.org/en/v1/}
             \item[Modern Julia Workflows] \url{https://modernjuliaworkflows.org/}
             \item[Discourse] \url{https://discourse.julialang.org}
-            \item[JuliaHub] A webfrontend for the General Registry of Julia packages
+            \item[JuliaHub] webfrontend for the General Registry
             \url{https://juliahub.com/ui/Packages}
-            \item[These slides] \url{https://github.com/Julia-Users-Trondheim/Intro-to-Julia/blob/main/presentation/introduction-to-julia.pdf}
+            \item[These slides]
         \end{description}
-        \vspace{-\baselineskip}
-        \begin{columns}
-            \begin{column}{.71\textwidth}
+        \vspace{-1.25\baselineskip}
+        \begin{columns}[T]
+            \begin{column}{.075\textwidth}
             \end{column}
-            \begin{column}{.29\textwidth}
+            \begin{column}{.64\textwidth}
+                \ \\[.5\baselineskip]
+                \url{https://github.com/Julia-Users-Trondheim/Intro-to-Julia/blob/main/presentation/introduction-to-julia.pdf}
+            \end{column}
+            \begin{column}{.33\textwidth}
                 \qrcode[nolink,height=\textwidth]{https://github.com/Julia-Users-Trondheim/Intro-to-Julia/blob/main/presentation/introduction-to-julia.pdf}
             \end{column}
+            \begin{column}{.005\textwidth}
+            \end{column}
         \end{columns}
+        \vspace{.75\baselineskip}
     \end{frame}
     \section{Installation \& REPL}
-    \begin{frame}{Installation}
+    \begin{frame}[fragile]{Installation}
+        \begin{description}
+            \item[Windows] Install Julia from the Microsoft Store by running this in the command prompt
+            \begin{minted}{shell}
+    winget install julia -s msstore
+            \end{minted}
+            \ \\
+            \item[Mac OS / Linux] run the installer for example by
+            \begin{minted}{shell}
+    curl -fsSL https://install.julialang.org | sh
+            \end{minted}
+            \ldots or install \mintinline{shell}|juliaup| via your favourite package manager
+        \end{description}
+        \ \\
+        We can take a closer look at your individual installation after this presentation in the workshop.
     \end{frame}
     \begin{frame}{Read-Eval-Print Loop (REPL)}
         The Julia command line is called \alert{REPL}.
-
-        Quick commands
+        \begin{itemize}
+            \item for fast computations
+            \item easily define functions
+            \item \mintinline{julia}|include("script.jl");| to run a script.
+        \end{itemize}
+        \vspace{\baselineskip}
+        \pause
+        \alert{\textbf{Quick commands}}
         \begin{description}
             \item[\^\ D] Quit
             \item[\^\ L] Clear console screen
@@ -97,6 +166,15 @@
 
     \end{frame}
     \begin{frame}{General code format}
+
+    \end{frame}
+    \begin{frame}{TLDR: Main differences to Python}
+
+    \end{frame}
+    \begin{frame}{TLDR: Main differences to R}
+
+    \end{frame}
+    \begin{frame}{TLDR: Main differences to Matlab}
 
     \end{frame}
     \begin{frame}{For-loops, while and such}
