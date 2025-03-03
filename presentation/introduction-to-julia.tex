@@ -163,24 +163,28 @@
     \end{frame}
     \section{Main features}
     \begin{frame}{General philosophy}
-
+        \begin{itemize}
+            \item Write functions not scripts
+            \item Julia has data types, but not objects
+            \item write generic code “acting” on data
+            \item no need to write “vectorized code”
+            \item
+        \end{itemize}
     \end{frame}
     \begin{frame}{General code format}
-
+        \begin{itemize}
+            \item Indentation with 4 spaces is recommended but not necessary
+            \item blocks have an \mintinline{julia}|end|
+            \item functions that modify their data should be named with an \mintinline{julia}|!|.
+        \end{itemize}
     \end{frame}
-    \begin{frame}{TLDR: Main differences to Python}
-
-    \end{frame}
-    \begin{frame}{TLDR: Main differences to R}
-
-    \end{frame}
-    \begin{frame}{TLDR: Main differences to Matlab}
-
-    \end{frame}
-    \begin{frame}{For-loops, while and such}
+    \begin{frame}{Control flow}
 
     \end{frame}
     \begin{frame}{Functions}
+
+    \end{frame}
+    \begin{frame}{Vectorized code vs. Broadcast}
 
     \end{frame}
     \begin{frame}{structs – Data structures}
@@ -189,8 +193,65 @@
     \begin{frame}{Multiple Dispatch}
 
     \end{frame}
+    \begin{frame}{Functors}
+
+    \end{frame}
     \begin{frame}{Scripts}
 
+    \end{frame}
+    \begin{frame}[fragile]{TLDR: Main differences to Python}
+        \begin{itemize}
+            \item \mintinline{julia}|for, if, while| etc. blocks are terminated by  \mintinline{julia}|end|
+            \item indentation is nice, but not mandatory
+            \item \alert{Julia is 1-indexed}
+            \item Strings have single \mintinline{julia}|"quotation marks"|, multiline strings three
+            \pause
+            \item loops amd vectors are fast (no need for vectorized code)
+            \item abstract arrays allow arbitrary indexing $\Rightarrow$ \mintinline{python}|a[-1]| is in Julia \mintinline{julia}|a[end-1]|
+            \item Julias range \mintinline{julia}|1:5| includes the end and has the general form \mintinline{julia}|start:step:stop| (instead of \mintinline{python}|start:(stop+1):step|)
+            \item the imaginary unit is \mintinline{julia}|im| (not \mintinline{python}|j|)
+            \pause
+            \item Matrix multiplication is \mintinline{julia}|A * B|, element wise multiplication \mintinline{julia}|A .* B|
+            \item Julia has no objects/classes
+        \end{itemize}
+    \end{frame}
+    \begin{frame}[fragile]{TLDR: Main differences to R}
+        \begin{itemize}
+            \item \mintinline{julia}|‘single’| quotation marks are for characters
+            \item vectors are constructed with square brackets \mintinline{julia}|v = [1,2,3]|
+            \item operations on vectors of different length are not allowed
+            \item \mintinline{julia}|<-|, \mintinline{julia}|<<-| and \mintinline{julia}|->| are not assignment operators
+            \item \mintinline{julia}|->| creates an anonymous function
+            \pause
+            \item matrix multiplication is just \mintinline{julia}|A * B|
+            \item function arguments are not copied when calling a function
+            \item \mintinline{julia}|1:5| is an \mintinline{julia}|AbstractRange|, use \mintinline{julia}|collect(1:5)| to create the vector
+            \pause
+            \item you do not need vectorization for performance
+            \item logical indexing: in R \mintinline{R}|x[x>3]| has two alternatives in Julia
+            \begin{itemize}
+                \item \mintinline{julia}|x[ x .> 3]| (uses a temporary vector memory)
+                \item \mintinline{julia}|filter(z->z>3, x)| might be nicer to read
+                \item \mintinline{julia}|filter!(z->z>3, x)| updates \mintinline{julia}!x! inplace (avoids the temporary memory)
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+    \begin{frame}[fragile]{TLDR: Main differences to Matlab}
+        \begin{itemize}
+            \item array indexing uses square brackets \mintinline{julia}|A[i,j]|
+            \item Arrays are not copied by default \mintinline{julia}|A=B| references the same, do \mintinline{julia}|A=copy(B)| for an actual copy
+            \item \emph{similarly} function arguments are references, \alert{input variables can be modified}
+            \item 1-dimensional vectors exist and are not \mintinline{julia}|Nx1| matrices
+            \item \mintinline{julia}|42| is an integer, not a float, use \mintinline{julia}|42.0| for the float.
+            \item \mintinline{julia}|A == B| does not return a matrix of booleans but \mintinline{julia}|true| or \mintinline{julia}|false|\\
+            use \mintinline{julia}|A .== B| to get such a matrix
+            \item dimensions are not “constant-broadcasted”:\\
+            \begin{itemize}
+                \item \mintinline{matlab}|[1:10] + [1:10]'| creates a $10\times 10$ matrix in Matlab
+                \item \mintinline{julia}|[1:10] + [1:10]'| is a dimension mismatch,\\
+                 because a column vector can not be added to a row vector
+            \end{itemize}
+        \end{itemize}
     \end{frame}
     \section{Packages}
     \begin{frame}{Installing \& Using Pacakges}
