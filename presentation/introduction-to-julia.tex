@@ -130,7 +130,7 @@
         The Julia command line is called \alert{REPL}.
         \begin{itemize}
             \item for fast computations
-            \item easily define functions
+            \item easily define variables \& functions
             \item \mintinline{julia}|include("script.jl");| to run a script.
         \end{itemize}
         \vspace{\baselineskip}
@@ -162,24 +162,107 @@
         \end{description}
     \end{frame}
     \section{Main features}
-    \begin{frame}{General philosophy}
+    \begin{frame}{General philosophy \& Code format}
+        \alert{\textbf{Philosophy}}
         \begin{itemize}
             \item Write functions not scripts
             \item Julia has data types, but not objects
             \item write generic code “acting” on data
             \item no need to write “vectorized code”
-            \item
+            \item avoid global variables
         \end{itemize}
-    \end{frame}
-    \begin{frame}{General code format}
+        \vspace{\baselineskip}
+        \pause
+        \alert{\textbf{Format}}
         \begin{itemize}
-            \item Indentation with 4 spaces is recommended but not necessary
             \item blocks have an \mintinline{julia}|end|
+            \item Indentation with 4 spaces is recommended but not necessary
             \item functions that modify their data should be named with an \mintinline{julia}|!|.
         \end{itemize}
     \end{frame}
-    \begin{frame}{Control flow}
+    \begin{frame}[fragile]{Prequel: Packages \& Pluto Notebooks}
+        A \alert{Package} is a \alert{module} (namespace) providing additional functionality.
 
+        \begin{itemize}[<+->]
+            \item To install one for our demos use the package mode
+            \begin{minted}{julia-repl}
+] add Pluto
+            \end{minted}
+            This has only to be done once.
+            \item To load a package after starting Julia,
+            use the \mintinline{julia}{using} keyword
+            \begin{minted}{julia-repl}
+using Pluto
+            \end{minted}
+            \item we can call a function from the package always by
+            \begin{minted}{julia-repl}
+Pluto.run()
+            \end{minted}
+            \item the last two can be done in one line, when using \mintinline{julia}|;| as a divider
+            \begin{minted}{julia-repl}
+using Pluto; Pluto.run()
+            \end{minted}
+        \end{itemize}
+        \pause
+        We will continue command demos in the \href{https://plutojl.org}{Pluto notebook}
+        \\\hfill (similar to a Jupyter notebook, but with a persistent state)
+    \end{frame}
+    \begin{frame}[fragile]{Control flow: for, if \& while}
+        \vspace{-.25\baselineskip}
+        \begin{columns}[T]
+            \begin{column}{.5\textwidth}
+                To repreat something: for-loops
+                \begin{minted}{julia}
+for i=1:4
+    print(i," ")
+end # prints "1 2 3 4"
+                \end{minted}
+                \pause
+                Combine several (and use $\in$)
+                \begin{minted}[escapeinside=||,mathescape=true]{julia}
+for i |$\in$| 1:3, j |$\in$| 1:2
+    print(i,"×",j,", ")
+end # prints 1$\times$1, 1$\times$2, ...
+                \end{minted}
+                \pause
+                Or through several of same length
+                \begin{minted}[escapeinside=||,mathescape=true]{julia}
+for (i,j) |$\in$| zip(1:4, 5:8)
+    print(i,"|",j," ")
+end # prints 1|5 2|6 3|7 4|8
+                \end{minted}
+                \pause
+                or as a \alert{comprehension} for vectors
+                \begin{minted}[escapeinside=||,mathescape=true]{julia}
+x = [2*s for s |$\in$| 1:3 ]
+                \end{minted}
+            \end{column}
+            \pause
+            \begin{column}{.5\textwidth}
+                Conditionals look like
+                \begin{minted}{julia}
+if x > 3
+    print("x is at least 3")
+else
+    print("x is 3 or less")
+end
+                \end{minted}
+                \pause
+                or with \alert{lazy evaluation}:
+                \begin{minted}{julia}
+(x > 4) && print("x > 4")
+                \end{minted}
+                the print is only called if \mintinline{julia}|x>4| is \mintinline{julia}|true|.
+                \\[.5\baselineskip]
+                Repeating someting (Part II)
+                \begin{minted}{julia}
+i = 1;
+while i <= 4
+    print(i," "); i +=1
+end # also prints "1 2 3 4"
+                \end{minted}
+            \end{column}
+        \end{columns}
     \end{frame}
     \begin{frame}{Functions}
 
