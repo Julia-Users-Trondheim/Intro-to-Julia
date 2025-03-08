@@ -286,6 +286,7 @@ function phase(z)
 end
         \end{minted}
         \begin{itemize}[<+->]
+            \item \alert{naming convention} \mintinline{julia}|snake_case|
             \item (multiline) \mintinline{julia}|"String"| upfront: doc-string, may use  Markdown
             \item specify type with \mintinline{julia}|z::Number| (but \alert{avoid} overtyping like \mintinline{julia}{::Float64})
             \item (last) \mintinline{julia}|return| optional, but reommended\\
@@ -322,24 +323,28 @@ end
         \end{itemize}
     \end{frame}
     \begin{frame}[fragile]{Data structures}
-        \begin{minted}{julia}
-"A"
-struct Narrator #maybe of a ski vm?
-    name::String
-    volume::Int
-end
-        \end{minted}
+%        Build a hierarchy with
+%        \begin{minted}{julia}
+%abstract type Landmarks end
+%struct City <: Landmarks
+%    name::String
+%    position::Vector
+%end
+%        \end{minted}
+%        \begin{itemize}[<+->]
+%            \item the super type is implicit \mintinline{julia}|<:Any| if not specified
+%            \item all fields (should) have a type
+%            \item super types to build a hierarchy
+%            \item \alert{naming convention:} \mintinline{juia}|CamelCase| for types
+%        \end{itemize}
     \end{frame}
     \begin{frame}{Multiple Dispatch}
-
     \end{frame}
     \begin{frame}{Operators are Functions}
     \end{frame}
     \begin{frame}{Functors}
-
     \end{frame}
     \begin{frame}{Scripts}
-
     \end{frame}
     \begin{frame}[fragile]{TLDR: Main differences to Python}
         \begin{itemize}
