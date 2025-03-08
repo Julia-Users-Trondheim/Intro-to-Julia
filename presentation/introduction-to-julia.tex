@@ -207,11 +207,10 @@ using Pluto; Pluto.run()
         We will continue command demos in the \href{https://plutojl.org}{Pluto notebook}
         \\\hfill (similar to a Jupyter notebook, but with a persistent state)
     \end{frame}
-    \begin{frame}[fragile]{Control flow: for, if \& while}
-        \vspace{-.25\baselineskip}
+    \begin{frame}[fragile]{Control flow I: for \& while}
         \begin{columns}[T]
             \begin{column}{.5\textwidth}
-                To repreat something: for-loops
+                \alert{Iterate} with for-loops
                 \begin{minted}{julia}
 for i=1:4
     print(i," ")
@@ -231,50 +230,110 @@ for (i,j) |$\in$| zip(1:4, 5:8)
     print(i,"|",j," ")
 end # prints 1|5 2|6 3|7 4|8
                 \end{minted}
-                \pause
-                or as a \alert{comprehension} for vectors
-                \begin{minted}[escapeinside=||,mathescape=true]{julia}
-x = [2*s for s |$\in$| 1:3 ]
-                \end{minted}
             \end{column}
             \pause
             \begin{column}{.5\textwidth}
-                Conditionals look like
-                \begin{minted}{julia}
-if x > 3
-    print("x is at least 3")
-else
-    print("x is 3 or less")
-end
+                or as a \alert{comprehension} for vectors
+                \begin{minted}[escapeinside=||,mathescape=true]{julia}
+x = [3*s for s |$\in$| 1:3 ]
                 \end{minted}
-                \pause
-                or with \alert{lazy evaluation}:
-                \begin{minted}{julia}
-(x > 4) && print("x > 4")
-                \end{minted}
-                the print is only called if \mintinline{julia}|x>4| is \mintinline{julia}|true|.
-                \\[.5\baselineskip]
-                Repeating someting (Part II)
+                creates \mintinline{julia}|[3, 6, 9]|
+                \\[2.5\baselineskip]
+                Loops with “unknown end”
                 \begin{minted}{julia}
 i = 1;
+# do as long as i <= 4
 while i <= 4
-    print(i," "); i +=1
+    print(i," ");
+    i += 1
 end # also prints "1 2 3 4"
                 \end{minted}
             \end{column}
         \end{columns}
     \end{frame}
-    \begin{frame}{Functions}
-
+    \begin{frame}[fragile]{Control flow II: Conditionals}
+        \alert{Conditionals} require an expression that evaluates to a \mintinline{julia}|Bool|. Then
+        \begin{minted}{julia}
+if (x > 3) || (z < 2) # brackets (x > 3) are optional
+    print("x is at least 3")
+else
+    print("x is 3 or less")
+end
+        \end{minted}
+        \pause
+        There is \alert{lazy evaluation}: the second parts of
+        \begin{minted}{julia}
+ (x > 4) && print("x > 4")
+(x <= 4) || print("x > 4")
+        \end{minted}
+        are only called/evaluated if $x > 4$.
+        \\[\baselineskip]
+        \pause
+        Conditionals can be used inline with
+        \begin{minted}{julia}
+y = (x > 4) ? 1 : 3*x
+        \end{minted}
     \end{frame}
-    \begin{frame}{Vectorized code vs. Broadcast}
+    \begin{frame}[fragile]{Defining functions}
+        \begin{minted}{julia}
+"""
+    phase(z)
 
+Compute the phase of a complex number z
+"""
+function phase(z)
+    return atan(imag(z), real(z))
+end
+        \end{minted}
+        \begin{itemize}[<+->]
+            \item (multiline) \mintinline{julia}|"String"| upfront: doc-string, may use  Markdown
+            \item specify type with \mintinline{julia}|z::Number| (but \alert{avoid} overtyping like \mintinline{julia}{::Float64})
+            \item (last) \mintinline{julia}|return| optional, but reommended\\
+            \hfill(last evaluated expression returned)
+        \end{itemize}
+    \pause
+    Shorter form
+    \begin{minted}{julia}
+magnitude(z) = sqrt(imag(z)^2+real(z)^2)
+    \end{minted}
     \end{frame}
-    \begin{frame}{structs – Data structures}
-
+    \begin{frame}[fragile]{More on functions}
+        \begin{itemize}[<+->]
+            \item functions are first-class objects (like variables)
+            \item anonymous function \mintinline{julia}|  (x,y) -> x^y  | e.g. to pass as parameter
+            \item \alert{Broadcast}: apply \mintinline{julia}|phase(z)| to a whole vector
+            \begin{minted}{julia}
+Z = [1.0im, 2.0, 1.0 + 0.2im]
+            \end{minted}
+            by adding a \mintinline{julia}|.| after the function name: \mintinline{julia}|    phase.(Z)|
+            \item broadcast with multiple vectors
+            \begin{minted}{julia}
+X = [0.1, 0.2, 0.3]; Y = [1.0, 2.0, 3.0]
+X.^Y # same: [X[i]^Y[i] for i=1:3] or [0.1, 0.04, 0.027]
+            \end{minted}
+            \item functions can modify their input
+            \begin{minted}{julia}
+function add_scalar!(X, v)
+    X .+= v  # X an array, v a scalar: add to every entry
+    return X # the X we got passed is now changed
+end
+            \end{minted}
+            \alert{Convention:} such a functions name ends in \mintinline{julia}|!|, it returns the modified
+        \end{itemize}
+    \end{frame}
+    \begin{frame}[fragile]{Data structures}
+        \begin{minted}{julia}
+"A"
+struct Narrator #maybe of a ski vm?
+    name::String
+    volume::Int
+end
+        \end{minted}
     \end{frame}
     \begin{frame}{Multiple Dispatch}
 
+    \end{frame}
+    \begin{frame}{Operators are Functions}
     \end{frame}
     \begin{frame}{Functors}
 
