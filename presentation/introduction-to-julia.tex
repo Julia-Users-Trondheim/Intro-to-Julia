@@ -600,14 +600,66 @@ end
         \end{itemize}
     \end{frame}
     \section{Packages}
-    \begin{frame}{Installing \& Using Packages}
-
+    \begin{frame}[fragile]{Namespaces \& Modules}
+        \begin{minted}{julia}
+module MyModule #Same naming convention as types: CamelCase
+    f(x) = x^2         # is exported
+    struct MyField end # is not exported
+    export f
+end
+        \end{minted}
+        \begin{itemize}[<+->]
+            \item introduces a namespace, loaded with \mintinline{julia}|using .MyModule|
+            \\\hfill{\footnotesize (the \mintinline{julia}|.| necessary for modules defined in scripts/REPL)}
+            \item a module can internally also use other (dependent) packages.
+            \item anything it \mintinline{julia}|export|s is available in \alert{global} namespace
+            \item other functions/structs via \mintinline{julia}|MyModule.local_function|
+            \item[!] if two modules \mintinline{julia}|A| and \mintinline{julia}|B| exort \mintinline{julia}|f|, one also has to use
+            \mintinline{julia}|A.f| and \mintinline{julia}|B.f|
+            \\ or specify which one to use with \mintinline{julia}|using A: f|
+            \item Default packages are among others \mintinline{julia}|Base| (loaded on start)\\
+            \mintinline{julia}|LinearAlgebra|,
+            \mintinline{julia}|Random,|
+            \mintinline{julia}|Statistics|, ...
+        \end{itemize}
     \end{frame}
-    \begin{frame}{Package versions \& Updating}
-
+    \begin{frame}[fragile]{Installing \& Using Packages}
+        \begin{itemize}[<+->]
+            \item modules that come from a \alert{Registry}, package manager: \mintinline{julia}|Pkg.jl|
+            \item default: \url{https://github.com/JuliaRegistries/General}
+            \item Shortcut: \alert{Package mode} in REPL; Start command with \mintinline{julia}|] |
+            \item \mintinline{julia}|] add PackageName| installs a package
+            \begin{itemize}
+                \item including all packages \mintinline{julia}{PackageName} \alert{depends} on.
+                \item resolves versions to “fit” to all already installed ones
+            \end{itemize}
+            \item \mintinline{julia}|] status| lists all installed packages with their versions
+            \item \mintinline{julia}|] update| update all packages to newest version
+        \end{itemize}
+        \pause
+        After a package is installed, it can be used with
+        \begin{minted}{julia}
+using PackageName, PackageA, PackageB,
+        \end{minted}
     \end{frame}
     \begin{frame}{Package environments}
-
+        \begin{itemize}
+            \item in package mode: prefix \mintinline{shell}|(@v1.11) pkg>| refers to the environment:
+            \\by default the (global, version based) environment
+            \item an \alert{environment} is a set of packages and their versions
+            \item use \mintinline{julia}|] activate Name| to activate a new environment
+            \item use \mintinline{julia}|] activate .| to turn the current folder into an environment.
+            \begin{itemize}[<+->]
+                \item[$\Rightarrow$] This is easy to activate for a set of scripts
+                \item[$\Rightarrow$] reproducible: in the environment,
+                we always have the same set of packages in their versions
+                \item[$\Rightarrow$] file \mintinline{julia}|Project.toml| allows others to install that environment as well:\\
+                After activation to \mintinline{julia}|] instantiate| to install all packages in exactly the specified versions
+                \item even safer: \mintinline{julia}|Manifest.toml| all packages and their dependencies in \alert{exact versions} resolved
+            \end{itemize}
+        \end{itemize}
+        \pause
+        \alert{Overall:} \textbf{Reproducible} environment / setup to run your experiments in
     \end{frame}
     \section{Pluto Notebooks}
     \begin{frame}{Pluto.jl – Motivation}
