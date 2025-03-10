@@ -288,7 +288,7 @@ end
         \begin{itemize}[<+->]
             \item \alert{naming convention} \mintinline{julia}|snake_case|
             \item (multiline) \mintinline{julia}|"String"| upfront: doc-string, may use  Markdown
-            \item specify type with \mintinline{julia}|z::Number| (but \alert{avoid} overtyping like \mintinline{julia}{::Float64})
+            \item specify type: \mintinline{julia}|z::Number| (\alert{avoid} overtyping as \mintinline{julia}{::Float64})
             \item (last) \mintinline{julia}|return| optional, but reommended\\
             \hfill(last evaluated expression returned)
         \end{itemize}
@@ -298,9 +298,9 @@ end
 magnitude(z) = sqrt(imag(z)^2+real(z)^2)
     \end{minted}
     \end{frame}
-    \begin{frame}[fragile]{More on functions I: positional and keyword args}
+    \begin{frame}[fragile]{More on functions I: positional \& keyword args}
         \begin{itemize}
-            \item \alert{positional optional} parameters are defined by providing defaults
+            \item \alert{positional optional} parameters: providing defaults
         \begin{minted}{julia}
 f(a, b=2, c=3) = a*exp(b/c)
 f(1) #equals f(1,2,3)
@@ -315,7 +315,7 @@ g(a; b=2, c=3) = a*exp(b/c)
 g(1; b=3) #equals g(1; b=3, c=3)
 g(1; c=5) #equals g(1; b=2, c=5)
         \end{minted}
-            \item name has to be specified to set a value, order is \alert{not} important.
+            \item must variable name to set a value, order is \alert{not} important.
             \pause
             \item in \mintinline{julia}|g(1; b=4, b=3)| the last one “wins”, so \mintinline{julia}|b| is 3.
             \pause
@@ -330,12 +330,12 @@ g(1; c=5) #equals g(1; b=2, c=5)
     \begin{frame}[fragile]{More on functions II: broadcast and mutation}
         \begin{itemize}[<+->]
             \item functions are first-class objects (like variables)
-            \item anonymous function \mintinline{julia}|  (x,y) -> x^y  | e.g. to pass as parameter
+            \item anonymous function \mintinline{julia}|(x,y) -> x^y| e.g., to pass as parameter
             \item \alert{Broadcast}: apply \mintinline{julia}|phase(z)| to a whole vector
             \begin{minted}{julia}
 Z = [1.0im, 2.0, 1.0 + 0.2im]
             \end{minted}
-            by adding a \mintinline{julia}|.| after the function name: \mintinline{julia}|    phase.(Z)|
+            by adding a \mintinline{julia}|.| after the function name: \mintinline{julia}|phase.(Z)|
             \item broadcast with multiple vectors
             \begin{minted}{julia}
 X = [0.1, 0.2, 0.3]; Y = [1.0, 2.0, 3.0]
@@ -348,28 +348,29 @@ function add_scalar!(X, v)
     return X # the X we got passed is now changed
 end
             \end{minted}
-            \alert{Convention:} such a functions name ends in \mintinline{julia}|!|, it returns the modified
+            \alert{Convention:} modifying function names end with \mintinline{julia}|!|\\
+            and return the modified variable.
         \end{itemize}
     \end{frame}
     \begin{frame}[fragile]{Data structures}
         \vspace{-.25\baselineskip}
         \begin{columns}[T]
-            \begin{column}{.68\textwidth}
-                There are \alert{abstract types} to build a type hierarchy.
+            \begin{column}{.65\textwidth}
+                \alert{Abstract types} to build a type hierarchy:
                 \begin{minted}{julia}
 abstract type ExperimentData end
                 \end{minted}
             \end{column}
             \pause
-            \begin{column}{.3\textwidth}
-            \alert{naming convention:} Types are
+            \begin{column}{.33\textwidth}
+            \alert{naming convention:}\\ Types are
             \mintinline{julia}|CamelCase|.
             \end{column}
         \end{columns}
         \vspace{\baselineskip}
         \pause
         \begin{columns}[T]
-            \begin{column}{.51\textwidth}
+            \begin{column}{.49\textwidth}
                 \textbf{Variant I.} default: immutable
                 \begin{minted}{julia}
 struct TimeSeries <: ExperimentData
@@ -379,7 +380,7 @@ end # default constructor:
 ts = TimeSeries("A", [1,2,3])
                 \end{minted}
             \end{column}
-            \begin{column}{.48\textwidth}
+            \begin{column}{.5\textwidth}
                 \vspace{-.25\baselineskip}
                 \pause
                 \begin{itemize}[<+->]
