@@ -644,27 +644,67 @@ using PackageName, PackageA, PackageB,
     \end{frame}
     \begin{frame}{Package environments}
         \begin{itemize}
-            \item in package mode: prefix \mintinline{shell}|(@v1.11) pkg>| refers to the environment:
-            \\by default the (global, version based) environment
+            \item in package mode: \mintinline{shell}|(@v1.11) pkg>| refers to\\
+            current environment: by default the global one
             \item an \alert{environment} is a set of packages and their versions
             \item use \mintinline{julia}|] activate Name| to activate a new environment
             \item use \mintinline{julia}|] activate .| to turn the current folder into an environment.
             \begin{itemize}[<+->]
                 \item[$\Rightarrow$] This is easy to activate for a set of scripts
                 \item[$\Rightarrow$] reproducible: in the environment,
-                we always have the same set of packages in their versions
-                \item[$\Rightarrow$] file \mintinline{julia}|Project.toml| allows others to install that environment as well:\\
-                After activation to \mintinline{julia}|] instantiate| to install all packages in exactly the specified versions
+                we always have the same packages/package versions
+                \item[$\Rightarrow$] file \mintinline{julia}|Project.toml| allows others to
+                activate and \mintinline{julia}|] instantiate| (install its packages) on other machines as well
                 \item even safer: \mintinline{julia}|Manifest.toml| all packages and their dependencies in \alert{exact versions} resolved
             \end{itemize}
         \end{itemize}
         \pause
-        \alert{Overall:} \textbf{Reproducible} environment / setup to run your experiments in
+        \alert{\textbf{$\Rightarrow$}} \textbf{Reproducible} environment / setup to run your experiments in
     \end{frame}
     \section{Pluto Notebooks}
-    \begin{frame}{Pluto.jl – Motivation}
+    \begin{frame}[fragile]{The Julia package Pluto.jl}
+        \hfill\href{https://plutojl.org}{plutojl.org}
+        \begin{itemize}
+            \item browser-based code development
+            \item purely Julia based
+            \pause
+            \item only code-cells with \alert{one} command per cell
+            \begin{itemize}
+                \item use \mintinline{julia}|begin ... end| block to wrap multiple commands
+                \item Markdown cell: a \mintinline{julia}|md"..."| (\mintinline{julia}|md"""..."""| multiline) string
+            \end{itemize}
+            \item execute cell by \mintinline{shell}|Shift+Enter| or saving the file.
+            \pause
+            \item For Markdown or long, technical code cells: hide code.
+            \pause
+            \item Live-docs – display the documentation of current function
+            \pause
+            \item similar to Mathematica or Jupyter notebooks
+        \end{itemize}
+        On terminal \mintinline{julia}|using Pluto; Pluto.run();| to start the webserver.
     \end{frame}
-    \begin{frame}{Similarities \& differentes to Jupyter}
+    \begin{frame}{Notable differentes to Jupyter}
+        \begin{itemize}[<+->]
+            \item the Pluto notebook is saved as a script \mintinline{julia}|nootebook.jl|
+            \begin{itemize}
+                \item[$\Rightarrow$] it can also be run using \mintinline{julia}|include("notebook.jl")| on REPL
+                \item[{$\ominus$}] output of cells is not saved to file
+                \item[{$\oplus$}] the source code file fits well into version management like \mintinline{shell}|git|
+            \end{itemize}
+            \item a Pluto notebook “knows its used packages versions”:
+            \begin{itemize}[<+->]
+                \item it opens an own environment on start
+                \item keeps track of all (exact!) versions of the installed packages
+                \item[$\oplus$] it is running reproducibly, even on other peoples computers!
+            \end{itemize}
+            \item The pluto notebook has a \alert{persistent state}
+            \begin{itemize}
+                \item internally keeps track which cells depend on others
+                \item[$\Rightarrow$] changing a parameter updates \alert{all} dependent cells
+                \item[$\oplus$] all cells always reflect the current global state of code
+                \item[$\Rightarrow$] you never have to remember to “execute cells in right order”
+            \end{itemize}
+        \end{itemize}
     \end{frame}
     \begin{frame}{Live Demo}
     \end{frame}
