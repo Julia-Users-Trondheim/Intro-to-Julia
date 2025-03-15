@@ -1,0 +1,211 @@
+\documentclass[a5paper,12pt,DIV=14,footheight=-30pt, headheight=60pt, twoside=off]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\thispagestyle{empty}
+\usepackage[inline]{enumitem}
+\usepackage[english]{babel}
+\usepackage{booktabs,listings,scrlayer-scrpage,xcolor}
+\usepackage{mathsemantics, amsmath, amssymb, bm, hyperref}
+\definecolor{juliared}{rgb}{0.796, 0.235, 0.2}
+\definecolor{juliagreen}{rgb}{0.22, 0.596, 0.149}
+\definecolor{juliablue}{rgb}{0.251, 0.388, 0.847}
+\definecolor{juliapurple}{rgb}{0.584, 0.345, 0.698}
+\setlength{\parskip}{.5\baselineskip}
+\setlength{\parindent}{0pt}
+\hypersetup{colorlinks=true,urlcolor=juliagreen, linkcolor=juliablue}
+\setlist[enumerate,1]{itemsep=-.5ex}
+\setlist[enumerate,2]{label=\color{black}\alph*)}
+\newenvironment{sublist}[1][]{% begin code
+  \color{juliapurple}%
+  \quad\begin{enumerate*}[#1]%
+}%
+{\end{enumerate*}}
+\newcommand{\pagenote}[1]{{\small({\color{juliablue}N\,#1})}}
+\newcommand{\codenote}[1]{{\small({\color{juliablue}\texttt{#1}})}}
+\newcommand{\timenote}[1]{\marginline{\tiny #1}}
+\setkomafont{pageheadfoot}{\small}
+%\setkomafont{pagehead}{\bfseries}
+\lohead{Intro to Julia}
+\rohead{}
+%\cofoot{}
+\begin{document}
+\thispagestyle{empty}
+\textbf{Intro to Julia\quad Vår 2025}\hfill{March 20, 2025, SB II, R5}\\
+\begin{enumerate}
+    \item Title:
+    \textbf{Introduction to Julia}
+    \item Overview
+\end{enumerate}
+\textbf{What is Julia}
+\begin{enumerate}[resume]
+    \item Goal: SciComp \& Prototyping
+    \begin{sublist}
+        \item high performance \item high-level \item Often C/C++
+    \end{sublist}
+    \item Combine both: Julia
+    \begin{sublist}
+        \item 3 main features \item history
+    \end{sublist}
+    \item Resources
+\end{enumerate}
+\textbf{Installation \& REPL}
+\begin{enumerate}[resume]
+    \item Installation
+    \item REPL\\
+    \emph{Have a first, empty terminal ready to start julia in}
+    \\
+    \begin{sublist}
+        \item name \& examples (copy a few)
+        \item shortcuts
+    \end{sublist}
+    \item Modes
+    \begin{sublist}
+        \item ? (illustrate with sqrt)\item ] \item ;
+    \end{sublist}
+\end{enumerate}
+\textbf{Main features}
+\begin{enumerate}[resume]
+    \item General Philosophy \& format
+    \begin{sublist}
+        \item Philosophy \item Format
+    \end{sublist}
+    \item Prequel: Start a notebook\\
+    \emph{Prepare that second terminal and the browser with Pluto open upfront}
+    \\
+    \begin{sublist}
+        \item add \item using \item run \item or both together \item we continue
+    \end{sublist}
+    \item Control Flor I: for \& while
+    \begin{sublist}
+        \item for 1 \item for 2 \item for 3 \item compr \item while
+    \end{sublist}
+    \item Control Flow II: Conditionals
+    \begin{sublist}
+        \item if \item lazy \item inline
+    \end{sublist}
+    \item Defining functions
+    \begin{sublist}
+        \item naming \item doc \item type \item return \item shorter
+    \end{sublist}
+    \item More on functions I: args\&kwargs
+    \begin{sublist}
+        \item pos \item kwargs \item pass on
+    \end{sublist}
+    \item More on functions II: Broadcast \& Mutation
+    \begin{sublist}
+        \item first class \& anonymous \item broadcast \item multiple
+        \item modify \item naming
+    \end{sublist}
+    \item Data structures
+    \begin{sublist}
+        \item abstract \item naming \item struct \item is immutable \item but fields
+        \item efficient (2 artificial breaks!)
+        \item mutable \item can change \item less
+    \end{sublist}
+    \item Parameyric types
+    \begin{sublist}
+        \item motivation \item II \item III \item def/clumsy \item nicer
+        \item concrete vector \item own constructor
+    \end{sublist}
+    \item Multiple Dispatch
+    \begin{sublist}
+        \item best fitting \item Def \item we get \item most fitting
+        \item multiple \item avoid \item resolve
+    \end{sublist}
+    \item Operators are functions
+    \begin{sublist}
+        \item Def \item then \item also parametric
+    \end{sublist}
+    \item Functors
+    \begin{sublist}
+        \item poly struct
+        \item functor
+        \item we get
+    \end{sublist}
+    \item Python
+    \begin{sublist}
+        \item end\item indent \item 1 \item string \item loops fast
+        \item abstract arrays \item range \item imag \item matmul \item dispatch
+    \end{sublist}
+    \item R
+    \begin{sublist}
+        \item single quotes \item vectors \item ops on diff lengths \item assignment
+        \item anon fct \item mat mul \item pass by ref \item abstract range
+        \item no vectorize code
+        \item indexing
+    \end{sublist}
+    \item Matlab
+    \begin{sublist}
+        \item arrays in [] \item copy arrays \item modify \item 1-dim
+        \item int/float
+        \item use broadcast
+        \item no auto broadcast
+    \end{sublist}
+\end{enumerate}
+\textbf{Packages}
+\begin{enumerate}[resume]
+    \item Namespaces \& Modules
+    \begin{sublist}
+        \item namespace
+        \item use others
+        \item export
+        \item others with prefix
+        \item ! name clash
+        \item default packages
+    \end{sublist}
+    \item Installing \& using Packages
+    \begin{sublist}
+        \item Registy \& Pkg
+        \item default
+        \item package mode again
+        \item add
+        \item installs
+        \item resolves versions
+        \item status
+        \item update
+        \item using
+    \end{sublist}
+    \item Package environments
+    \begin{sublist}
+        \item env defined
+        \item default
+        \item activate
+        \item current folder, easy!
+        \item reproducible
+        \item project
+        \item manifest
+        \item reproducible(!)
+    \end{sublist}
+\end{enumerate}
+\textbf{Pluto Notebooks}
+\begin{enumerate}[resume]
+    \item Pluto.jl
+    \begin{sublist}
+        \item intro
+        \item cells \& execute
+        \item hide code
+        \item live docs
+        \item status
+        \item start
+    \end{sublist}
+    \item Differences to Jupyter
+    \begin{sublist}
+        \item Script
+        \item includable
+        \item output
+        \item git
+        \item versions intern
+        \item own env on start
+        \item exact versions
+        \item reproducible
+        \item persistent state
+        \item dependencies
+        \item update all dependents
+        \item global state
+        \item no need to rememebr right order
+    \end{sublist}
+    \item Live Demo (create something with Makie and sliders?)
+    \item Further topics
+\end{enumerate}
+\textbf{workshop!}
+\end{document}
